@@ -1,158 +1,1140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tech Connect | Session Details</title>
- 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
- 
-  <style>
-    :root{--blue:#303fbd;--bright-blue:#35a4df;--pale:#eaf5fc;--text:#20232a;--border:#d7dce1}*{box-sizing:border-box}body{margin:0;color:var(--text);font-family:Inter,Arial,sans-serif;background:#fff;font-size:14px}.topbar{height:28px;background:#111;color:#ddd;font-size:8px;letter-spacing:1px;padding:8px 4%;border-bottom:1px solid #777}.site-header{height:65px;display:flex;align-items:center;gap:20px;padding:0 3%;border-bottom:1px solid #eee;background:#fff;position:relative;z-index:3}.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:#2596c7;white-space:nowrap}.brand-mark{font-size:27px;color:#1b1b1b}.brand b{display:block;font-size:12px;letter-spacing:.3px}.brand small{display:block;font-size:7px;letter-spacing:1.3px;color:#666;margin-top:2px}.main-nav{display:flex;gap:16px;align-items:center;margin:auto}.main-nav a{font-size:10px;text-decoration:none;color:#171717;font-weight:600}.header-icons{display:flex;align-items:center;gap:10px}.header-icons button,.mobile-menu{border:0;background:none;padding:0;color:#111;display:grid;place-items:center;cursor:pointer}.header-icons svg{width:17px;height:17px;stroke-width:2.8}.header-icons button:last-child svg{width:25px;height:25px}.mobile-menu{display:none}main{max-width:1240px;margin:auto;padding:14px 16px}.session-panel{display:grid;grid-template-columns: .86fr 1.14fr;gap:14px;background:#f7fbfd;padding:8px;border-radius:5px}.technician-card{border:1px solid #e8edf0;border-radius:6px;background:#fff;padding:8px;display:flex;flex-direction:column;min-width:0}.technician-photo{width:100%;height:220px;object-fit:cover;object-position:center 25%;border-radius:3px;background:#eaf5fc}.rating-content{padding:10px 9px 4px}.rating-content h3{text-align:center;margin:0 0 14px;font-size:16px}.overall{display:flex;align-items:center;justify-content:space-between;font-size:13px;margin-bottom:12px}.stars{color:#111;font-size:21px;letter-spacing:1px}.rating-row{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:10px;font-weight:600}.rating-row>span:first-child{width:82px}.meter{height:7px;background:#e8e8e8;border-radius:8px;flex:1;overflow:hidden}.meter i{display:block;height:100%;background:#111;border-radius:8px}.btn{border:0;border-radius:5px;padding:12px 14px;cursor:pointer;font-family:inherit;font-weight:700;transition:filter .2s,transform .2s}.btn:hover{filter:brightness(.94)}.btn:active{transform:scale(.99)}.btn-blue{background:var(--blue);color:#fff;box-shadow:0 2px 4px #0002}.change-tech{font-size:16px;margin-top:8px;padding:14px 8px}.session-details{padding:0 0 0 0;display:flex;flex-direction:column;min-width:0}.technician-avatar{height:94px;background:#eaf5fc;border-radius:6px;display:grid;place-items:center;margin-bottom:10px}.technician-avatar img{width:62px;height:62px;border-radius:50%;object-fit:cover;border:3px solid #fff}.detail-field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}.detail-field label{font-size:19px;font-weight:700}.detail-field input{height:36px;border:0;border-bottom:7px solid #eaf5fc;background:#fff;width:100%;padding:6px 8px;font:inherit;outline-color:#8bcbea}.detail-field input[type=date],.detail-field input[type=time]{color:#333}.session-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:3px}.session-actions .btn{font-size:15px;min-height:60px;padding:12px 8px}.btn-red{background:#bf2c35;color:white}.btn-green{background:#2ec132;color:white}.feedback{font-size:12px;color:#226a2b;margin:6px 0;min-height:12px}.back-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:24px 5px 20px;color:#8b8b8b;font-size:12px}.btn-outline{border:2px solid #74c7ef;background:#fff;color:#2a9ed6;display:flex;align-items:center;gap:8px;padding:8px 15px;font-size:15px}.btn-outline svg{width:21px}.services-section{background:#fff}.category-heading{background:var(--pale);text-align:center;color:#6daacb;font-size:12px;font-weight:700;padding:12px 8px 5px}.category-tabs{background:var(--pale);display:flex;justify-content:space-around;align-items:center;gap:4px;padding:8px 8px 16px;overflow-x:auto}.category-tabs button{border:0;background:transparent;color:#50545a;white-space:nowrap;padding:10px 8px;font-size:10px;cursor:pointer;border-bottom:2px solid transparent}.category-tabs button.active{border-bottom-color:#7c8991}.service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:10px 0 18px}.service-card{border:1px solid #d6d9dc;border-radius:5px;padding:4px 5px 7px;box-shadow:0 1px 3px #0001;display:flex;flex-direction:column;min-width:0;background:radial-gradient(#ddd 0.6px,transparent .6px);background-size:7px 7px}.service-card[hidden]{display:none}.service-card img{width:100%;height:150px;object-fit:cover;border-radius:3px}.service-card h3{color:#2d9bd2;font-size:20px;text-align:center;margin:11px 0 8px}.service-card p{font-size:11px;color:#777;text-align:center;line-height:1.45;padding:0 6px;margin:10px 0 16px;flex:1}.service-card .btn{font-size:13px;margin:0 5px 1px;padding:12px 5px}.promo-grid{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin:3px 0 8px;height:370px}.promo-grid>img,.promo-side img{width:100%;height:100%;object-fit:cover;border-radius:2px}.promo-side{display:grid;grid-template-rows:1fr 1fr;gap:8px;min-height:0}.site-footer{position:relative;color:#fff;background:#101719 url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;padding:28px 4% 16px;min-height:270px}.footer-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.72)),rgba(0,0,0,.55)}.footer-content,.copyright{position:relative}.footer-content{display:grid;grid-template-columns:2fr repeat(5,1fr);gap:22px}.footer-brand .brand-mark,.footer-brand small{color:#fff}.footer-brand b{color:#2aa5d9}.footer-about p{font-size:10px;line-height:1.55;color:#ddd;max-width:280px;margin:17px 0}.socials{display:flex;gap:12px}.socials a{color:#fff;text-decoration:none;background:#ffffff24;width:23px;height:23px;border-radius:3px;display:grid;place-items:center;font-size:12px;font-weight:700}.footer-col{display:flex;flex-direction:column;gap:8px}.footer-col h4{color:#35a5da;font-size:11px;margin:3px 0 7px}.footer-col a{font-size:9px;color:#ddd;text-decoration:none;overflow-wrap:anywhere}.footer-col a:hover{text-decoration:underline}.copyright{text-align:center;color:#ddd;font-size:9px;margin-top:25px;padding-top:8px}
-@media(min-width:900px){main{padding:20px 24px}.session-panel{grid-template-columns: .85fr 1.15fr;gap:20px;padding:12px}.technician-photo{height:290px}.rating-content h3{font-size:18px}.detail-field input{height:42px}.service-card img{height:190px}.service-card h3{font-size:22px}.service-card p{font-size:12px}.promo-grid{height:440px}}
-@media(max-width:700px){.site-header{height:58px;gap:10px;padding:0 12px;justify-content:space-between}.brand-mark{font-size:22px}.brand b{font-size:10px}.brand small{font-size:6px}.mobile-menu{display:grid;order:3}.mobile-menu svg{width:22px}.main-nav{display:none;position:absolute;top:58px;left:0;right:0;background:#fff;box-shadow:0 5px 10px #0002;padding:14px;flex-direction:column;align-items:flex-start;gap:14px}.main-nav.open{display:flex}.header-icons{gap:8px;margin-left:auto}.header-icons button:nth-child(2),.header-icons button:nth-child(3),.header-icons button:nth-child(4),.header-icons button:nth-child(5){display:none}.header-icons svg{width:18px}main{padding:10px 8px}.session-panel{gap:8px;padding:5px;grid-template-columns:.85fr 1.15fr}.technician-card{padding:4px}.technician-photo{height:150px}.rating-content{padding:8px 3px 2px}.rating-content h3{font-size:11px;margin-bottom:8px}.overall{font-size:10px;margin-bottom:7px}.stars{font-size:14px;letter-spacing:0}.rating-row{gap:4px;font-size:7px;margin:8px 0}.rating-row>span:first-child{width:55px}.meter{height:5px}.change-tech{font-size:12px;padding:10px 4px;margin-top:5px}.technician-avatar{height:68px;margin-bottom:7px}.technician-avatar img{width:48px;height:48px}.detail-field{gap:5px;margin-bottom:7px}.detail-field label{font-size:15px}.detail-field input{height:29px;border-bottom-width:5px;font-size:10px;padding:4px}.session-actions{gap:4px}.session-actions .btn{font-size:11px;min-height:48px;padding:7px 3px}.feedback{font-size:9px}.back-row{padding:18px 3px 17px;font-size:9px}.btn-outline{font-size:12px;padding:6px 8px;gap:4px}.btn-outline svg{width:16px}.category-heading{font-size:10px;padding-top:9px}.category-tabs{justify-content:flex-start;padding:5px 8px 10px}.category-tabs button{font-size:8px;padding:8px 7px}.service-grid{gap:8px;padding-top:8px}.service-card{padding:3px 3px 5px}.service-card img{height:70px}.service-card h3{font-size:14px;margin:8px 0 5px}.service-card p{font-size:7px;line-height:1.35;padding:0 2px;margin:8px 0 12px}.service-card .btn{font-size:9px;padding:9px 2px;margin:0 2px}.promo-grid{height:220px;gap:5px}.promo-side{gap:5px}.site-footer{padding:18px 12px 12px}.footer-content{grid-template-columns:1.4fr 1fr 1fr;gap:17px 12px}.footer-about{grid-column:span 3}.footer-about p{max-width:100%;margin:10px 0}.footer-col h4{font-size:10px}.footer-col a{font-size:8px}.copyright{font-size:8px;margin-top:16px}}
-@media(max-width:380px){.header-icons{gap:5px}.header-icons button:nth-child(6){display:none}.session-panel{grid-template-columns:.82fr 1.18fr}.technician-photo{height:125px}.stars{font-size:12px}.rating-row>span:first-child{width:48px}.service-card img{height:60px}.service-card h3{font-size:12px}.service-card p{font-size:6.5px}.service-card .btn{font-size:8px}.promo-grid{height:180px}}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Connect | Session Details</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
+    <style>
+      :root {
+        --blue: #303fbd;
+        --bright-blue: #35a4df;
+        --pale: #eaf5fc;
+        --text: #20232a;
+        --border: #d7dce1;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: Inter, Arial, sans-serif;
+        background: #fff;
+        font-size: 14px;
+      }
+      .topbar {
+        height: 28px;
+        background: #111;
+        color: #ddd;
+        font-size: 8px;
+        letter-spacing: 1px;
+        padding: 8px 4%;
+        border-bottom: 1px solid #777;
+      }
+      .site-header {
+        height: 65px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 3%;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+        position: relative;
+        z-index: 3;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #2596c7;
+        white-space: nowrap;
+      }
+      .brand-mark {
+        font-size: 27px;
+        color: #1b1b1b;
+      }
+      .brand b {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.3px;
+      }
+      .brand small {
+        display: block;
+        font-size: 7px;
+        letter-spacing: 1.3px;
+        color: #666;
+        margin-top: 2px;
+      }
+      .main-nav {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin: auto;
+      }
+      .main-nav a {
+        font-size: 10px;
+        text-decoration: none;
+        color: #171717;
+        font-weight: 600;
+      }
+      .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-icons button,
+      .mobile-menu {
+        border: 0;
+        background: none;
+        padding: 0;
+        color: #111;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .header-icons svg {
+        width: 17px;
+        height: 17px;
+        stroke-width: 2.8;
+      }
+      .header-icons button:last-child svg {
+        width: 25px;
+        height: 25px;
+      }
+      .mobile-menu {
+        display: none;
+      }
+      main {
+        max-width: 1240px;
+        margin: auto;
+        padding: 14px 16px;
+      }
+      .session-panel {
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: 14px;
+        background: #f7fbfd;
+        padding: 8px;
+        border-radius: 5px;
+      }
+      .technician-card {
+        border: 1px solid #e8edf0;
+        border-radius: 6px;
+        background: #fff;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .technician-photo {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        object-position: center 25%;
+        border-radius: 3px;
+        background: #eaf5fc;
+      }
+      .rating-content {
+        padding: 10px 9px 4px;
+      }
+      .rating-content h3 {
+        text-align: center;
+        margin: 0 0 14px;
+        font-size: 16px;
+      }
+      .overall {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .stars {
+        color: #111;
+        font-size: 21px;
+        letter-spacing: 1px;
+      }
+      .rating-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .rating-row > span:first-child {
+        width: 82px;
+      }
+      .meter {
+        height: 7px;
+        background: #e8e8e8;
+        border-radius: 8px;
+        flex: 1;
+        overflow: hidden;
+      }
+      .meter i {
+        display: block;
+        height: 100%;
+        background: #111;
+        border-radius: 8px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 5px;
+        padding: 12px 14px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 700;
+        transition: filter 0.2s, transform 0.2s;
+      }
+      .btn:hover {
+        filter: brightness(0.94);
+      }
+      .btn:active {
+        transform: scale(0.99);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 2px 4px #0002;
+      }
+      .change-tech {
+        font-size: 16px;
+        margin-top: 8px;
+        padding: 14px 8px;
+      }
+      .session-details {
+        padding: 0 0 0 0;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .technician-avatar {
+        height: 94px;
+        background: #eaf5fc;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 10px;
+      }
+      .technician-avatar img {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #fff;
+      }
+      .detail-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .detail-field label {
+        font-size: 19px;
+        font-weight: 700;
+      }
+      .detail-field input {
+        height: 36px;
+        border: 0;
+        border-bottom: 7px solid #eaf5fc;
+        background: #fff;
+        width: 100%;
+        padding: 6px 8px;
+        font: inherit;
+        outline-color: #8bcbea;
+      }
+      .detail-field input[type='date'],
+      .detail-field input[type='time'] {
+        color: #333;
+      }
+      .session-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        margin-top: 3px;
+      }
+      .session-actions .btn {
+        font-size: 15px;
+        min-height: 60px;
+        padding: 12px 8px;
+      }
+      .btn-red {
+        background: #bf2c35;
+        color: white;
+      }
+      .btn-green {
+        background: #2ec132;
+        color: white;
+      }
+      .feedback {
+        font-size: 12px;
+        color: #226a2b;
+        margin: 6px 0;
+        min-height: 12px;
+      }
+      .back-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 24px 5px 20px;
+        color: #8b8b8b;
+        font-size: 12px;
+      }
+      .btn-outline {
+        border: 2px solid #74c7ef;
+        background: #fff;
+        color: #2a9ed6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        font-size: 15px;
+      }
+      .btn-outline svg {
+        width: 21px;
+      }
+      .services-section {
+        background: #fff;
+      }
+      .category-heading {
+        background: var(--pale);
+        text-align: center;
+        color: #6daacb;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 12px 8px 5px;
+      }
+      .category-tabs {
+        background: var(--pale);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 8px 16px;
+        overflow-x: auto;
+      }
+      .category-tabs button {
+        border: 0;
+        background: transparent;
+        color: #50545a;
+        white-space: nowrap;
+        padding: 10px 8px;
+        font-size: 10px;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+      }
+      .category-tabs button.active {
+        border-bottom-color: #7c8991;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        padding: 10px 0 18px;
+      }
+      .service-card {
+        border: 1px solid #d6d9dc;
+        border-radius: 5px;
+        padding: 4px 5px 7px;
+        box-shadow: 0 1px 3px #0001;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        background: radial-gradient(#ddd 0.6px, transparent 0.6px);
+        background-size: 7px 7px;
+      }
+      .service-card[hidden] {
+        display: none;
+      }
+      .service-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 3px;
+      }
+      .service-card h3 {
+        color: #2d9bd2;
+        font-size: 20px;
+        text-align: center;
+        margin: 11px 0 8px;
+      }
+      .service-card p {
+        font-size: 11px;
+        color: #777;
+        text-align: center;
+        line-height: 1.45;
+        padding: 0 6px;
+        margin: 10px 0 16px;
+        flex: 1;
+      }
+      .service-card .btn {
+        font-size: 13px;
+        margin: 0 5px 1px;
+        padding: 12px 5px;
+      }
+      .promo-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 8px;
+        margin: 3px 0 8px;
+        height: 370px;
+      }
+      .promo-grid > img,
+      .promo-side img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2px;
+      }
+      .promo-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 8px;
+        min-height: 0;
+      }
+      .site-footer {
+        position: relative;
+        color: #fff;
+        background: #101719
+          url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80')
+          center/cover no-repeat;
+        padding: 28px 4% 16px;
+        min-height: 270px;
+      }
+      .footer-shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.72)
+          ),
+          rgba(0, 0, 0, 0.55);
+      }
+      .footer-content,
+      .copyright {
+        position: relative;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: 2fr repeat(5, 1fr);
+        gap: 22px;
+      }
+      .footer-brand .brand-mark,
+      .footer-brand small {
+        color: #fff;
+      }
+      .footer-brand b {
+        color: #2aa5d9;
+      }
+      .footer-about p {
+        font-size: 10px;
+        line-height: 1.55;
+        color: #ddd;
+        max-width: 280px;
+        margin: 17px 0;
+      }
+      .socials {
+        display: flex;
+        gap: 12px;
+      }
+      .socials a {
+        color: #fff;
+        text-decoration: none;
+        background: #ffffff24;
+        width: 23px;
+        height: 23px;
+        border-radius: 3px;
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .footer-col h4 {
+        color: #35a5da;
+        font-size: 11px;
+        margin: 3px 0 7px;
+      }
+      .footer-col a {
+        font-size: 9px;
+        color: #ddd;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+      }
+      .footer-col a:hover {
+        text-decoration: underline;
+      }
+      .copyright {
+        text-align: center;
+        color: #ddd;
+        font-size: 9px;
+        margin-top: 25px;
+        padding-top: 8px;
+      }
+      @media (min-width: 900px) {
+        main {
+          padding: 20px 24px;
+        }
+        .session-panel {
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 20px;
+          padding: 12px;
+        }
+        .technician-photo {
+          height: 290px;
+        }
+        .rating-content h3 {
+          font-size: 18px;
+        }
+        .detail-field input {
+          height: 42px;
+        }
+        .service-card img {
+          height: 190px;
+        }
+        .service-card h3 {
+          font-size: 22px;
+        }
+        .service-card p {
+          font-size: 12px;
+        }
+        .promo-grid {
+          height: 440px;
+        }
+      }
+      @media (max-width: 700px) {
+        .site-header {
+          height: 58px;
+          gap: 10px;
+          padding: 0 12px;
+          justify-content: space-between;
+        }
+        .brand-mark {
+          font-size: 22px;
+        }
+        .brand b {
+          font-size: 10px;
+        }
+        .brand small {
+          font-size: 6px;
+        }
+        .mobile-menu {
+          display: grid;
+          order: 3;
+        }
+        .mobile-menu svg {
+          width: 22px;
+        }
+        .main-nav {
+          display: none;
+          position: absolute;
+          top: 58px;
+          left: 0;
+          right: 0;
+          background: #fff;
+          box-shadow: 0 5px 10px #0002;
+          padding: 14px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+        .main-nav.open {
+          display: flex;
+        }
+        .header-icons {
+          gap: 8px;
+          margin-left: auto;
+        }
+        .header-icons button:nth-child(2),
+        .header-icons button:nth-child(3),
+        .header-icons button:nth-child(4),
+        .header-icons button:nth-child(5) {
+          display: none;
+        }
+        .header-icons svg {
+          width: 18px;
+        }
+        main {
+          padding: 10px 8px;
+        }
+        .session-panel {
+          gap: 8px;
+          padding: 5px;
+          grid-template-columns: 0.85fr 1.15fr;
+        }
+        .technician-card {
+          padding: 4px;
+        }
+        .technician-photo {
+          height: 150px;
+        }
+        .rating-content {
+          padding: 8px 3px 2px;
+        }
+        .rating-content h3 {
+          font-size: 11px;
+          margin-bottom: 8px;
+        }
+        .overall {
+          font-size: 10px;
+          margin-bottom: 7px;
+        }
+        .stars {
+          font-size: 14px;
+          letter-spacing: 0;
+        }
+        .rating-row {
+          gap: 4px;
+          font-size: 7px;
+          margin: 8px 0;
+        }
+        .rating-row > span:first-child {
+          width: 55px;
+        }
+        .meter {
+          height: 5px;
+        }
+        .change-tech {
+          font-size: 12px;
+          padding: 10px 4px;
+          margin-top: 5px;
+        }
+        .technician-avatar {
+          height: 68px;
+          margin-bottom: 7px;
+        }
+        .technician-avatar img {
+          width: 48px;
+          height: 48px;
+        }
+        .detail-field {
+          gap: 5px;
+          margin-bottom: 7px;
+        }
+        .detail-field label {
+          font-size: 15px;
+        }
+        .detail-field input {
+          height: 29px;
+          border-bottom-width: 5px;
+          font-size: 10px;
+          padding: 4px;
+        }
+        .session-actions {
+          gap: 4px;
+        }
+        .session-actions .btn {
+          font-size: 11px;
+          min-height: 48px;
+          padding: 7px 3px;
+        }
+        .feedback {
+          font-size: 9px;
+        }
+        .back-row {
+          padding: 18px 3px 17px;
+          font-size: 9px;
+        }
+        .btn-outline {
+          font-size: 12px;
+          padding: 6px 8px;
+          gap: 4px;
+        }
+        .btn-outline svg {
+          width: 16px;
+        }
+        .category-heading {
+          font-size: 10px;
+          padding-top: 9px;
+        }
+        .category-tabs {
+          justify-content: flex-start;
+          padding: 5px 8px 10px;
+        }
+        .category-tabs button {
+          font-size: 8px;
+          padding: 8px 7px;
+        }
+        .service-grid {
+          gap: 8px;
+          padding-top: 8px;
+        }
+        .service-card {
+          padding: 3px 3px 5px;
+        }
+        .service-card img {
+          height: 70px;
+        }
+        .service-card h3 {
+          font-size: 14px;
+          margin: 8px 0 5px;
+        }
+        .service-card p {
+          font-size: 7px;
+          line-height: 1.35;
+          padding: 0 2px;
+          margin: 8px 0 12px;
+        }
+        .service-card .btn {
+          font-size: 9px;
+          padding: 9px 2px;
+          margin: 0 2px;
+        }
+        .promo-grid {
+          height: 220px;
+          gap: 5px;
+        }
+        .promo-side {
+          gap: 5px;
+        }
+        .site-footer {
+          padding: 18px 12px 12px;
+        }
+        .footer-content {
+          grid-template-columns: 1.4fr 1fr 1fr;
+          gap: 17px 12px;
+        }
+        .footer-about {
+          grid-column: span 3;
+        }
+        .footer-about p {
+          max-width: 100%;
+          margin: 10px 0;
+        }
+        .footer-col h4 {
+          font-size: 10px;
+        }
+        .footer-col a {
+          font-size: 8px;
+        }
+        .copyright {
+          font-size: 8px;
+          margin-top: 16px;
+        }
+      }
+      @media (max-width: 380px) {
+        .header-icons {
+          gap: 5px;
+        }
+        .header-icons button:nth-child(6) {
+          display: none;
+        }
+        .session-panel {
+          grid-template-columns: 0.82fr 1.18fr;
+        }
+        .technician-photo {
+          height: 125px;
+        }
+        .stars {
+          font-size: 12px;
+        }
+        .rating-row > span:first-child {
+          width: 48px;
+        }
+        .service-card img {
+          height: 60px;
+        }
+        .service-card h3 {
+          font-size: 12px;
+        }
+        .service-card p {
+          font-size: 6.5px;
+        }
+        .service-card .btn {
+          font-size: 8px;
+        }
+        .promo-grid {
+          height: 180px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">✉ &nbsp; TECHCONNECT@EMAIL.COM</div>
+    <header class="site-header">
+      <a class="brand" href="#"
+        ><span class="brand-mark">♟</span
+        ><span><b>TECH CONNECT</b><small>REPAIR &amp; SERVICES</small></span></a
+      >
+      <button
+        class="mobile-menu"
+        id="menuToggle"
+        aria-label="Toggle navigation"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+      <nav class="main-nav" id="mainNav">
+        <a href="#">Home</a><a href="#services">Shop</a
+        ><a href="#services">Men</a><a href="#services">Women</a
+        ><a href="#services">Accessories</a><a href="#about">About</a
+        ><a href="#contact">Contact</a>
+      </nav>
+      <div class="header-icons">
+        <button aria-label="Search"><i data-lucide="search"></i></button
+        ><button aria-label="Menu"><i data-lucide="menu"></i></button
+        ><button aria-label="Settings"><i data-lucide="settings"></i></button
+        ><button aria-label="Help"><i data-lucide="circle-help"></i></button
+        ><button aria-label="Shopping bag">
+          <i data-lucide="shopping-bag"></i></button
+        ><button aria-label="Account">
+          <i data-lucide="circle-user-round"></i>
+        </button>
+      </div>
+    </header>
 
+    <main>
+      <section class="session-panel">
+        <article class="technician-card">
+          <img
+            class="technician-photo"
+            src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=700&q=85"
+            alt="Technician wearing a hard hat"
+          />
+          <div class="rating-content">
+            <h3>Ratings from Clients</h3>
+            <div class="overall">
+              <b>Overall</b><span class="stars">★ ★ ★ ◐ ☆</span>
+            </div>
+            <div class="rating-row">
+              <span>Experience</span
+              ><span class="meter"><i style="width: 95%"></i></span>
+            </div>
+            <div class="rating-row">
+              <span>Speed</span
+              ><span class="meter"><i style="width: 48%"></i></span>
+            </div>
+            <div class="rating-row">
+              <span>Accuracy</span
+              ><span class="meter"><i style="width: 68%"></i></span>
+            </div>
+            <div class="rating-row">
+              <span>Personality</span
+              ><span class="meter"><i style="width: 52%"></i></span>
+            </div>
+          </div>
+          <button class="btn btn-blue change-tech">Change Technician</button>
+        </article>
 
+        <article class="session-details">
+          <div class="technician-avatar">
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80"
+              alt="Selected technician"
+            />
+          </div>
+          <div class="detail-field">
+            <label for="sessionDate">Date:</label
+            ><input id="sessionDate" type="date" />
+          </div>
+          <div class="detail-field">
+            <label for="sessionTime">Time:</label
+            ><input id="sessionTime" type="time" />
+          </div>
+          <div class="detail-field">
+            <label for="sessionAddress">Address:</label
+            ><input
+              id="sessionAddress"
+              type="text"
+              placeholder="Enter your service address"
+            />
+          </div>
+          <div class="session-actions">
+            <button class="btn btn-red" id="cancelSession">
+              Cancel session</button
+            ><button class="btn btn-green" id="startSession">
+              Initiate Session
+            </button>
+          </div>
+          <p class="feedback" id="feedback" role="status"></p>
+        </article>
+      </section>
 
-  </style>
-</head>
-<body>
-  <div class="topbar">✉ &nbsp; TECHCONNECT@EMAIL.COM</div>
-  <header class="site-header">
-    <a class="brand" href="#"><span class="brand-mark">♟</span><span><b>TECH CONNECT</b><small>REPAIR &amp; SERVICES</small></span></a>
-    <button class="mobile-menu" id="menuToggle" aria-label="Toggle navigation"><i data-lucide="menu"></i></button>
-    <nav class="main-nav" id="mainNav">
-      <a href="#">Home</a><a href="#services">Shop</a><a href="#services">Men</a><a href="#services">Women</a><a href="#services">Accessories</a><a href="#about">About</a><a href="#contact">Contact</a>
-    </nav>
-    <div class="header-icons"><button aria-label="Search"><i data-lucide="search"></i></button><button aria-label="Menu"><i data-lucide="menu"></i></button><button aria-label="Settings"><i data-lucide="settings"></i></button><button aria-label="Help"><i data-lucide="circle-help"></i></button><button aria-label="Shopping bag"><i data-lucide="shopping-bag"></i></button><button aria-label="Account"><i data-lucide="circle-user-round"></i></button></div>
-  </header>
+      <div class="back-row">
+        <span>Go back to the session and select a different service</span
+        ><button class="btn btn-outline" id="backButton">
+          <i data-lucide="arrow-left"></i> Back
+        </button>
+      </div>
 
-  <main>
-    <section class="session-panel">
-      <article class="technician-card">
-        <img class="technician-photo" src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=700&q=85" alt="Technician wearing a hard hat" />
-        <div class="rating-content">
-          <h3>Ratings from Clients</h3>
-          <div class="overall"><b>Overall</b><span class="stars">★ ★ ★ ◐ ☆</span></div>
-          <div class="rating-row"><span>Experience</span><span class="meter"><i style="width:95%"></i></span></div>
-          <div class="rating-row"><span>Speed</span><span class="meter"><i style="width:48%"></i></span></div>
-          <div class="rating-row"><span>Accuracy</span><span class="meter"><i style="width:68%"></i></span></div>
-          <div class="rating-row"><span>Personality</span><span class="meter"><i style="width:52%"></i></span></div>
+      <section class="services-section" id="services">
+        <div class="category-heading">cathergury</div>
+        <div
+          class="category-tabs"
+          role="tablist"
+          aria-label="Service categories"
+        >
+          <button class="active" data-category="all">Repair</button
+          ><button data-category="installation">Installation</button
+          ><button data-category="maintenance">maintenance</button
+          ><button data-category="upgrading">upgrading</button
+          ><button data-category="system">system replacement</button
+          ><button data-category="development">development</button
+          ><button data-category="tech">Tech</button>
         </div>
-        <button class="btn btn-blue change-tech">Change Technician</button>
-      </article>
+        <div class="service-grid">
+          <article class="service-card" data-service="installation">
+            <img
+              src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=85"
+              alt="Electrician installing wiring"
+            />
+            <h3>Installation</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button class="btn btn-blue book-service" data-name="Installation">
+              Book Service
+            </button>
+          </article>
+          <article class="service-card" data-service="repair">
+            <img
+              src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=700&q=85"
+              alt="Technician working on electrical wiring"
+            />
+            <h3>Wireing</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button class="btn btn-blue book-service" data-name="Wireing">
+              Book Service
+            </button>
+          </article>
+          <article class="service-card" data-service="maintenance">
+            <img
+              src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=700&q=85"
+              alt="Electrical maintenance work"
+            />
+            <h3>Maintenance</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button class="btn btn-blue book-service" data-name="Maintenance">
+              Book Service
+            </button>
+          </article>
+          <article class="service-card" data-service="upgrading">
+            <img
+              src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=700&q=85"
+              alt="Technician upgrading an electrical system"
+            />
+            <h3>Upgrad System</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button
+              class="btn btn-blue book-service"
+              data-name="Upgrade System"
+            >
+              Book Service
+            </button>
+          </article>
+          <article class="service-card" data-service="system">
+            <img
+              src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=85"
+              alt="Technician replacing equipment"
+            />
+            <h3>Change System</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button class="btn btn-blue book-service" data-name="Change System">
+              Book Service
+            </button>
+          </article>
+          <article class="service-card" data-service="development">
+            <img
+              src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=700&q=85"
+              alt="Technician completing a project"
+            />
+            <h3>Project</h3>
+            <p>
+              Our plumbing services offers full plumbing and maintenance for
+              your house or company anywhere in CAMEROON.
+            </p>
+            <button class="btn btn-blue book-service" data-name="Project">
+              Book Service
+            </button>
+          </article>
+        </div>
+      </section>
 
-      <article class="session-details">
-        <div class="technician-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80" alt="Selected technician" /></div>
-        <div class="detail-field"><label for="sessionDate">Date:</label><input id="sessionDate" type="date" /></div>
-        <div class="detail-field"><label for="sessionTime">Time:</label><input id="sessionTime" type="time" /></div>
-        <div class="detail-field"><label for="sessionAddress">Address:</label><input id="sessionAddress" type="text" placeholder="Enter your service address" /></div>
-        <div class="session-actions"><button class="btn btn-red" id="cancelSession">Cancel session</button><button class="btn btn-green" id="startSession">Initiate Session</button></div>
-        <p class="feedback" id="feedback" role="status"></p>
-      </article>
-    </section>
+      <section class="promo-grid" id="about">
+        <img
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
+          alt="Technician working on a rooftop installation"
+        />
+        <div class="promo-side">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=85"
+            alt="Skilled technician in a workshop"
+          /><img
+            src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=85"
+            alt="Tools and equipment"
+          />
+        </div>
+      </section>
+    </main>
 
-    <div class="back-row"><span>Go back to the session and select a different service</span><button class="btn btn-outline" id="backButton"><i data-lucide="arrow-left"></i> Back</button></div>
-
-    <section class="services-section" id="services">
-      <div class="category-heading">cathergury</div>
-      <div class="category-tabs" role="tablist" aria-label="Service categories">
-        <button class="active" data-category="all">Repair</button><button data-category="installation">Installation</button><button data-category="maintenance">maintenance</button><button data-category="upgrading">upgrading</button><button data-category="system">system replacement</button><button data-category="development">development</button><button data-category="tech">Tech</button>
+    <footer class="site-footer" id="contact">
+      <div class="footer-shade"></div>
+      <div class="footer-content">
+        <div class="footer-about">
+          <a class="brand footer-brand" href="#"
+            ><span class="brand-mark">♟</span
+            ><span
+              ><b>TECH CONNECT</b><small>REPAIR &amp; SERVICES</small></span
+            ></a
+          >
+          <p>
+            Welcome to Tech Connect. We offer the best professional services in
+            Cameroon, with skilled technicians and reliable support for your
+            home or business.
+          </p>
+          <div class="socials">
+            <a href="#" aria-label="YouTube">▶</a
+            ><a href="#" aria-label="TikTok">♪</a
+            ><a href="#" aria-label="LinkedIn">in</a
+            ><a href="#" aria-label="Facebook">f</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Category</h4>
+          <a href="#services">Electronics</a><a href="#services">Electrical</a
+          ><a href="#services">Carpentry</a><a href="#services">Building</a
+          ><a href="#services">Painting</a><a href="#services">Mechanics</a
+          ><a href="#services">Welding</a>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="#services">Spare Parts</a><a href="#services">Service</a
+          ><a href="#services">Tools</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#about">About Us</a><a href="#contact">Contact</a
+          ><a href="#">Dashboard</a><a href="#">Services</a><a href="#">Tasks</a
+          ><a href="#">Portal Login</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:TechConnect@email.com">TechConnect@email.com</a
+          ><a href="mailto:customer@email.com">customer@email.com</a
+          ><a href="tel:+237680824329">+237 680-824-329</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a><a href="#">Security</a><a href="#">Cookies</a
+          ><a href="#">Terms of use</a>
+        </div>
       </div>
-      <div class="service-grid">
-        <article class="service-card" data-service="installation"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=85" alt="Electrician installing wiring"><h3>Installation</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Installation">Book Service</button></article>
-        <article class="service-card" data-service="repair"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=700&q=85" alt="Technician working on electrical wiring"><h3>Wireing</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Wireing">Book Service</button></article>
-        <article class="service-card" data-service="maintenance"><img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=700&q=85" alt="Electrical maintenance work"><h3>Maintenance</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Maintenance">Book Service</button></article>
-        <article class="service-card" data-service="upgrading"><img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=700&q=85" alt="Technician upgrading an electrical system"><h3>Upgrad System</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Upgrade System">Book Service</button></article>
-        <article class="service-card" data-service="system"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=85" alt="Technician replacing equipment"><h3>Change System</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Change System">Book Service</button></article>
-        <article class="service-card" data-service="development"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=700&q=85" alt="Technician completing a project"><h3>Project</h3><p>Our plumbing services offers full plumbing and maintenance for your house or company anywhere in CAMEROON.</p><button class="btn btn-blue book-service" data-name="Project">Book Service</button></article>
-      </div>
-    </section>
+      <div class="copyright">© 2026 Tech Connect. All Rights Reserved.</div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) lucide.createIcons()
 
-    <section class="promo-grid" id="about">
-      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="Technician working on a rooftop installation" />
-      <div class="promo-side"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=85" alt="Skilled technician in a workshop"/><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=85" alt="Tools and equipment"/></div>
-    </section>
-  </main>
+        const menuToggle = document.getElementById('menuToggle')
+        const mainNav = document.getElementById('mainNav')
+        menuToggle?.addEventListener('click', () =>
+          mainNav.classList.toggle('open')
+        )
 
-  <footer class="site-footer" id="contact">
-    <div class="footer-shade"></div>
-    <div class="footer-content">
-      <div class="footer-about"><a class="brand footer-brand" href="#"><span class="brand-mark">♟</span><span><b>TECH CONNECT</b><small>REPAIR &amp; SERVICES</small></span></a><p>Welcome to Tech Connect. We offer the best professional services in Cameroon, with skilled technicians and reliable support for your home or business.</p><div class="socials"><a href="#" aria-label="YouTube">▶</a><a href="#" aria-label="TikTok">♪</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Facebook">f</a></div></div>
-      <div class="footer-col"><h4>Category</h4><a href="#services">Electronics</a><a href="#services">Electrical</a><a href="#services">Carpentry</a><a href="#services">Building</a><a href="#services">Painting</a><a href="#services">Mechanics</a><a href="#services">Welding</a></div>
-      <div class="footer-col"><h4>Products</h4><a href="#services">Spare Parts</a><a href="#services">Service</a><a href="#services">Tools</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact</a><a href="#">Dashboard</a><a href="#">Services</a><a href="#">Tasks</a><a href="#">Portal Login</a></div>
-      <div class="footer-col"><h4>Contact</h4><a href="mailto:TechConnect@email.com">TechConnect@email.com</a><a href="mailto:customer@email.com">customer@email.com</a><a href="tel:+237680824329">+237 680-824-329</a></div>
-      <div class="footer-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Security</a><a href="#">Cookies</a><a href="#">Terms of use</a></div>
-    </div>
-    <div class="copyright">© 2026 Tech Connect. All Rights Reserved.</div>
-  </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  if (window.lucide) lucide.createIcons();
+        const feedback = document.getElementById('feedback')
+        const say = message => {
+          if (feedback) feedback.textContent = message
+        }
 
-  const menuToggle = document.getElementById('menuToggle');
-  const mainNav = document.getElementById('mainNav');
-  menuToggle?.addEventListener('click', () => mainNav.classList.toggle('open'));
+        document
+          .getElementById('cancelSession')
+          ?.addEventListener('click', () => {
+            const confirmed = window.confirm(
+              'Are you sure you want to cancel this session?'
+            )
+            if (confirmed)
+              say(
+                'Session cancellation selected. Connect this action to your PHP backend to save it.'
+              )
+          })
 
-  const feedback = document.getElementById('feedback');
-  const say = (message) => { if (feedback) feedback.textContent = message; };
+        document
+          .getElementById('startSession')
+          ?.addEventListener('click', () => {
+            const date = document.getElementById('sessionDate').value
+            const time = document.getElementById('sessionTime').value
+            const address = document
+              .getElementById('sessionAddress')
+              .value.trim()
+            if (!date || !time || !address) {
+              say(
+                'Please enter the date, time and address before initiating the session.'
+              )
+              return
+            }
+            say(
+              `Session details ready: ${date} at ${time}. Connect this button to PHP/MySQL to save the booking.`
+            )
+          })
 
-  document.getElementById('cancelSession')?.addEventListener('click', () => {
-    const confirmed = window.confirm('Are you sure you want to cancel this session?');
-    if (confirmed) say('Session cancellation selected. Connect this action to your PHP backend to save it.');
-  });
+        document.getElementById('backButton')?.addEventListener('click', () => {
+          if (window.history.length > 1) window.history.back()
+          else say('You are already at the first page in this demo.')
+        })
 
-  document.getElementById('startSession')?.addEventListener('click', () => {
-    const date = document.getElementById('sessionDate').value;
-    const time = document.getElementById('sessionTime').value;
-    const address = document.getElementById('sessionAddress').value.trim();
-    if (!date || !time || !address) {
-      say('Please enter the date, time and address before initiating the session.');
-      return;
-    }
-    say(`Session details ready: ${date} at ${time}. Connect this button to PHP/MySQL to save the booking.`);
-  });
+        document.querySelectorAll('.category-tabs button').forEach(button => {
+          button.addEventListener('click', () => {
+            document
+              .querySelectorAll('.category-tabs button')
+              .forEach(tab => tab.classList.remove('active'))
+            button.classList.add('active')
+            const category = button.dataset.category
+            document.querySelectorAll('.service-card').forEach(card => {
+              card.hidden =
+                category !== 'all' && card.dataset.service !== category
+            })
+          })
+        })
 
-  document.getElementById('backButton')?.addEventListener('click', () => {
-    if (window.history.length > 1) window.history.back();
-    else say('You are already at the first page in this demo.');
-  });
+        document.querySelectorAll('.book-service').forEach(button => {
+          button.addEventListener('click', () => {
+            const service = button.dataset.name
+            say(
+              `${service} selected. Add your PHP booking handler to complete the reservation.`
+            )
+            document.getElementById('sessionDate')?.focus()
+            document
+              .querySelector('.session-panel')
+              ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          })
+        })
 
-  document.querySelectorAll('.category-tabs button').forEach(button => {
-    button.addEventListener('click', () => {
-      document.querySelectorAll('.category-tabs button').forEach(tab => tab.classList.remove('active'));
-      button.classList.add('active');
-      const category = button.dataset.category;
-      document.querySelectorAll('.service-card').forEach(card => {
-        card.hidden = category !== 'all' && card.dataset.service !== category;
-      });
-    });
-  });
-
-  document.querySelectorAll('.book-service').forEach(button => {
-    button.addEventListener('click', () => {
-      const service = button.dataset.name;
-      say(`${service} selected. Add your PHP booking handler to complete the reservation.`);
-      document.getElementById('sessionDate')?.focus();
-      document.querySelector('.session-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  document.querySelector('.change-tech')?.addEventListener('click', () => {
-    say('Technician selection is a demo. Connect this button to your technician list in MySQL.');
-  });
-});
-
-
-
-
-  </script>
-
-</body>
+        document
+          .querySelector('.change-tech')
+          ?.addEventListener('click', () => {
+            say(
+              'Technician selection is a demo. Connect this button to your technician list in MySQL.'
+            )
+          })
+      })
+    </script>
+  </body>
 </html>
