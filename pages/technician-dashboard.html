@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your technician work queue and stay connected with customers through Tech Connect.">
+    <title>Technician Dashboard | Tech Connect</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/technician-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <a class="brand" href="Home.html" aria-label="Tech Connect home">
+                <span class="brand-mark" aria-hidden="true">TC</span>
+                <span>Tech<span class="brand-accent">Connect</span></span>
+            </a>
+
+            <p class="sidebar-label">Technician workspace</p>
+            <nav class="sidebar-nav" aria-label="Technician dashboard navigation">
+                <a class="nav-link active" href="technician-dashboard.html" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true">▦</span> Overview
+                </a>
+                <a class="nav-link" href="#jobs">
+                    <span class="nav-icon" aria-hidden="true">▤</span> Job board
+                </a>
+                <a class="nav-link" href="#pricing-categories">
+                    <span class="nav-icon" aria-hidden="true">⚒</span> Service categories
+                </a>
+                <a class="nav-link" href="dashboard.html">
+                    <span class="nav-icon" aria-hidden="true">⌂</span> Customer dashboard
+                </a>
+            </nav>
+
+            <div class="sidebar-card">
+                <span class="sidebar-card-icon" aria-hidden="true">✳</span>
+                <h2>Stay ready for new work</h2>
+                <p>Check your job board for customer requests and keep your service information up to date.</p>
+                <a href="#jobs">View job board <span aria-hidden="true">→</span></a>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="about.html">
+                    <span class="nav-icon" aria-hidden="true">ⓘ</span> About Tech Connect
+                </a>
+                <p>Connecting skilled technicians with customers.</p>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="topbar">
+                <div class="breadcrumb"><span>Workspace</span><span aria-hidden="true">/</span><strong>Technician overview</strong></div>
+                <a class="support-link" href="contact.html"><span aria-hidden="true">?</span> Help &amp; support</a>
+            </header>
+
+            <div class="dashboard-content">
+                <section class="welcome-row" aria-labelledby="welcome-title">
+                    <div>
+                        <p class="eyebrow"><span></span> Technician workspace</p>
+                        <h1 id="welcome-title">Good work starts with the <span>right connection.</span></h1>
+                        <p class="welcome-copy">Keep an eye on customer requests and the jobs you’re working on.</p>
+                    </div>
+                    <a class="button button-primary" href="#jobs">View job board <span aria-hidden="true">↗</span></a>
+                </section>
+
+                <section class="stats-grid" aria-label="Technician work summary">
+                    <article class="stat-card">
+                        <span class="stat-icon stat-icon-blue" aria-hidden="true">◷</span>
+                        <span class="stat-label">Requests to review</span>
+                        <strong class="stat-value">0</strong>
+                        <span class="stat-footnote">New customer requests</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-icon stat-icon-dark" aria-hidden="true">⚒</span>
+                        <span class="stat-label">Active jobs</span>
+                        <strong class="stat-value">0</strong>
+                        <span class="stat-footnote">Work currently in progress</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-icon stat-icon-light" aria-hidden="true">✓</span>
+                        <span class="stat-label">Completed jobs</span>
+                        <strong class="stat-value">0</strong>
+                        <span class="stat-footnote">Completed customer requests</span>
+                    </article>
+                </section>
+
+                <section class="requests-panel" id="jobs" aria-labelledby="jobs-title">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="section-kicker">Your work queue</p>
+                            <h2 id="jobs-title">Customer requests</h2>
+                        </div>
+                        <a class="subtle-link" href="services.html">Service categories <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="empty-state">
+                        <div class="empty-illustration" aria-hidden="true">
+                            <span class="empty-document">☷</span>
+                            <span class="empty-spark">✳</span>
+                        </div>
+                        <h3>No requests to review</h3>
+                        <p>New customer requests will appear here when they’re available.</p>
+                        <a class="button button-outline" href="services.html">Explore service categories <span aria-hidden="true">→</span></a>
+                    </div>
+                </section>
+
+                <section class="category-section" id="pricing-categories" aria-labelledby="categories-title">
+                    <div class="panel-heading category-heading">
+                        <div>
+                            <p class="section-kicker">Service categories</p>
+                            <h2 id="categories-title">A clearer starting point for every quote</h2>
+                        </div>
+                        <span class="category-count">5 job categories</span>
+                    </div>
+                    <p class="category-intro">Use the job type and work involved to prepare a clear estimate. Confirm the final price with the customer before starting.</p>
+                    <div class="category-table-wrap" role="region" aria-label="Technician categories, common jobs, and quote factors" tabindex="0">
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Technician category</th>
+                                    <th scope="col">Common job types</th>
+                                    <th scope="col">What to consider when quoting</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><span class="category-name">Electrical</span></th>
+                                    <td>Lighting, outlets, wiring, fault finding</td>
+                                    <td>Number of fixtures, fault complexity, and parts</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="category-name">Plumbing</span></th>
+                                    <td>Leaks, taps, blocked drains, fixture installation</td>
+                                    <td>Type of repair, access to pipes, and replacement parts</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="category-name">AC &amp; refrigeration</span></th>
+                                    <td>Installation, servicing, cooling issues</td>
+                                    <td>Number of units, diagnosis, and any parts or refrigerant</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="category-name">Carpentry</span></th>
+                                    <td>Doors, shelves, cabinets, furniture repairs</td>
+                                    <td>Measurements, repair complexity, and materials</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="category-name">Painting &amp; finishing</span></th>
+                                    <td>Room painting, touch-ups, surface preparation</td>
+                                    <td>Area to cover, surface condition, and paint requirements</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="category-note"><span aria-hidden="true">i</span> These are quote factors, not fixed rates. Discuss labor, materials, and any additional work with the customer before beginning.</p>
+                </section>
+
+                <section class="technician-guide" aria-labelledby="guide-title">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="section-kicker">Getting started</p>
+                            <h2 id="guide-title">Make the most of your workspace</h2>
+                        </div>
+                    </div>
+                    <div class="guide-grid">
+                        <article class="guide-card">
+                            <span class="guide-number">01</span>
+                            <span class="guide-icon" aria-hidden="true">⌕</span>
+                            <h3>Review customer requests</h3>
+                            <p>Check the job board to see requests as they become available.</p>
+                        </article>
+                        <article class="guide-card">
+                            <span class="guide-number">02</span>
+                            <span class="guide-icon" aria-hidden="true">⚒</span>
+                            <h3>Choose your service areas</h3>
+                            <p>Explore the home-service categories customers can browse.</p>
+                            <a class="subtle-link" href="services.html">Browse categories <span aria-hidden="true">→</span></a>
+                        </article>
+                        <article class="guide-card">
+                            <span class="guide-number">03</span>
+                            <span class="guide-icon" aria-hidden="true">?</span>
+                            <h3>Need a hand?</h3>
+                            <p>Get in touch with the Tech Connect team if you have a question.</p>
+                            <a class="subtle-link" href="contact.html">Contact support <span aria-hidden="true">→</span></a>
+                        </article>
+                    </div>
+                </section>
+
+                <footer class="dashboard-footer">
+                    <span>© Tech Connect</span>
+                    <span>Good work starts with the right connection.</span>
+                    <a href="contact.html">Contact support</a>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
