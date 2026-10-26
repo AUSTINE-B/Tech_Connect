@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Completion & Review</title>
+    <style>
+        :root {
+            --bg: #f3f6fb;
+            --card: #ffffff;
+            --primary: #2d62f5;
+            --primary-strong: #254fe9;
+            --title: #181d29;
+            --muted: #727c8d;
+            --soft: #f7f9fc;
+            --line: #e8edf4;
+            --green: #1bb76d;
+            --green-soft: #ebfaf3;
+            --shadow: 0 18px 45px rgba(15, 28, 61, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--title);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .review-card {
+            width: min(100%, 360px);
+            background: var(--card);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            padding: 16px 16px 14px;
+            border: 1px solid rgba(125, 139, 165, 0.08);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .step-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), #88aaff);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 10px 20px rgba(45, 98, 245, 0.2);
+        }
+
+        .brand-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .brand img {
+            display: block;
+            width: 100px;
+            height: fit-content;
+        }
+
+        .brand-mark {
+            width: 16px;
+            height: 16px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--primary), #7ca5ff);
+            position: relative;
+        }
+
+        .brand-mark::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+        }
+
+        .icon-set {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7e899e;
+            font-size: 16px;
+        }
+
+        .icon-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            display: grid;
+            place-items: center;
+        }
+
+        .completion-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 12px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #fff;
+            margin-bottom: 18px;
+        }
+
+        .check-wrap {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--green-soft);
+            border: 1px solid rgba(27, 183, 109, 0.2);
+            display: grid;
+            place-items: center;
+            color: var(--green);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .completion-text {
+            flex: 1;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--title);
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 0 0 18px;
+        }
+
+        .summary-box {
+            background: var(--soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .summary-box .label {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .summary-box .value {
+            display: block;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: -0.04em;
+            color: var(--title);
+        }
+
+        .summary-box .value strong {
+            color: var(--green);
+            font-size: 16px;
+        }
+
+        .recent {
+            margin-top: 4px;
+        }
+
+        .recent-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .recent-head h3 {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .recent-head a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .booking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .booking-item {
+            display: grid;
+            grid-template-columns: 44px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 8px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: white;
+        }
+
+        .booking-id {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--soft);
+            border: 1px solid var(--line);
+            display: grid;
+            place-items: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--title);
+        }
+
+        .booking-info {
+            min-width: 0;
+        }
+
+        .booking-info .id {
+            display: block;
+            font-weight: 800;
+            font-size: 12px;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .booking-info .type {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .booking-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--green);
+            background: var(--green-soft);
+            border: 1px solid rgba(27, 183, 109, 0.2);
+            border-radius: 999px;
+            padding: 5px 8px;
+            white-space: nowrap;
+        }
+
+        .booking-status::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+        }
+
+        .booking-status.pending {
+            color: #d28b00;
+            background: #fff7e8;
+            border-color: rgba(210, 139, 0, 0.2);
+        }
+
+        .booking-status.pending::before {
+            background: #d28b00;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+        }
+
+        .nav-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: white;
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 380px) {
+            .review-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .booking-item {
+                grid-template-columns: 38px 1fr auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="review-card">
+            <div class="topbar">
+                <div class="step-badge">4</div>
+                <span>Completion and Review Page</span>
+            </div>
+
+            <div class="brand-row">
+                <div class="brand">
+                    <img src="/assets/Icons/tech-connect-logo.svg" alt="Tech Connect logo" width="16" height="16">
+                </div>
+                <div class="icon-set" aria-label="Actions">
+                    <span class="icon-btn">☰</span>
+                </div>
+            </div>
+
+            <div class="completion-box">
+                <div class="check-wrap" aria-hidden="true">✓</div>
+                <div class="completion-text">Repair Completed!</div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-box">
+                    <span class="label">Session Summary</span>
+                    <span class="value">1</span>
+                </div>
+                <div class="summary-box">
+                    <span class="label">Completed</span>
+                    <span class="value"><strong>12</strong></span>
+                </div>
+                <div class="summary-box">
+                    <span class="label">Total Spent</span>
+                    <span class="value">$640.00</span>
+                </div>
+            </div>
+
+            <div class="recent">
+                <div class="recent-head">
+                    <h3>Recent Bookings</h3>
+                    <a href="#">View all</a>
+                </div>
+
+                <div class="booking-list">
+                    <div class="booking-item">
+                        <div class="booking-id">ITC-4587</div>
+                        <div class="booking-info">
+                            <span class="id">ITC-4587</span>
+                            <span class="type">Electrical Repair</span>
+                        </div>
+                        <div class="booking-status pending">In Progress</div>
+                    </div>
+
+                    <div class="booking-item">
+                        <div class="booking-id">ITC-4521</div>
+                        <div class="booking-info">
+                            <span class="id">ITC-4521</span>
+                            <span class="type">Electrical Repair</span>
+                        </div>
+                        <div class="booking-status">Completed</div>
+                    </div>
+
+                    <div class="booking-item">
+                        <div class="booking-id">ITC-4419</div>
+                        <div class="booking-info">
+                            <span class="id">ITC-4419</span>
+                            <span class="type">Plumbing Repair</span>
+                        </div>
+                        <div class="booking-status">Completed</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav" aria-label="Bottom navigation">
+                <span class="nav-btn">⌂</span>
+                <span class="nav-btn primary">✦</span>
+                <span class="nav-btn">◌</span>
+                <span class="nav-btn">⚑</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

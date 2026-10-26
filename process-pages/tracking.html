@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Repair Tracking</title>
+    <style>
+        :root {
+            --bg: #eef2f8;
+            --card: #ffffff;
+            --soft: #f5f7fb;
+            --primary: #2d5df6;
+            --primary-soft: #eaf0ff;
+            --text: #1e2432;
+            --muted: #7d8698;
+            --line: #e7ebf2;
+            --green: #1dbf73;
+            --green-soft: #eafaf2;
+            --shadow: 0 18px 40px rgba(18, 30, 72, 0.08);
+        }
+
+        * { box-sizing: border-box; 
+        font-family: sans-serif; 
+    }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tracking-card {
+            width: min(100%, 360px);
+            background: var(--card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 16px 14px 18px;
+            border: 1px solid rgba(126, 138, 163, 0.08);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .step-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), #7ba4ff);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            box-shadow: 0 10px 22px rgba(45, 93, 246, 0.22);
+        }
+
+        .brand-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .brand img {
+            display: block;
+            width: 100px;
+            height: auto;
+        }
+
+        .brand-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--primary), #7ea3ff);
+            position: relative;
+        }
+
+        .brand-mark::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+        }
+
+        .menu-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--soft);
+            color: #7e8798;
+            font-size: 18px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .service-title {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            background: var(--green-soft);
+            color: var(--green);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            border: 1px solid rgba(29, 191, 115, 0.2);
+        }
+
+        .status-pill::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+            margin-right: 7px;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 16px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .meta strong {
+            color: var(--text);
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 12px 0 18px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 13px;
+            height: 2px;
+            background: var(--line);
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            font-size: 9px;
+            color: var(--muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #d7ddea;
+            background: white;
+            box-shadow: 0 0 0 3px white;
+        }
+
+        .step.active .dot {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 93, 246, 0.12);
+        }
+
+        .step.done .dot {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .step span {
+            display: block;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .tech-panel {
+            border-top: 1px solid var(--line);
+            padding-top: 16px;
+            margin-top: 4px;
+        }
+
+        .tech-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .tech-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d9e4ff, #afc5ff);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: #1d375d;
+            border: 2px solid rgba(45, 93, 246, 0.1);
+        }
+
+        .name {
+            margin: 0;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .rating {
+            margin-top: 3px;
+            font-size: 10px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            color: #f5b301;
+            font-size: 12px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            color: var(--primary);
+            
+        }
+
+        .location-box {
+            margin-top: 14px;
+        }
+
+        .location-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .map {
+            position: relative;
+            height: 200px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, #edf4ff 0%, #dfeefc 100%);
+            overflow: hidden;
+            border: 1px solid rgba(150, 168, 197, 0.2);
+        }
+
+        .map::before,
+        .map::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.65;
+        }
+
+        .map::before {
+            background-image:
+                linear-gradient(90deg, rgba(255,255,255,0.18) 0 8%, transparent 8% 12%, rgba(255,255,255,0.1) 12% 20%, transparent 20% 100%),
+                linear-gradient(180deg, rgba(255,255,255,0.14) 0 12%, transparent 12% 16%, rgba(255,255,255,0.12) 16% 24%, transparent 24% 100%);
+        }
+
+        .map::after {
+            background-image:
+                radial-gradient(circle at 18% 28%, rgba(76, 167, 92, 0.14) 0 16%, transparent 17%),
+                radial-gradient(circle at 67% 70%, rgba(76, 167, 92, 0.1) 0 18%, transparent 19%),
+                linear-gradient(120deg, transparent 0 58%, rgba(116, 163, 235, 0.18) 58% 62%, transparent 62% 100%);
+        }
+
+        .map-pin {
+            position: absolute;
+            left: 58%;
+            top: 48%;
+            width: 22px;
+            height: 22px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            background: var(--primary);
+            box-shadow: 0 0 0 8px rgba(45, 93, 246, 0.12);
+        }
+
+        .map-pin::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            left: 7px;
+            top: 7px;
+        }
+
+        .location-label {
+            position: absolute;
+            left: 50%;
+            top: 62%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(165, 176, 196, 0.25);
+            border-radius: 10px;
+            font-size: 10px;
+            padding: 6px 10px;
+            color: var(--text);
+            box-shadow: 0 8px 18px rgba(40, 68, 120, 0.08);
+        }
+
+        @media (max-width: 380px) {
+            .tracking-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .timeline {
+                gap: 4px;
+            }
+
+            .step span {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="tracking-card">
+            <div class="topbar">
+                <div class="step-badge">2</div>
+                <span>Repair Tracking Page</span>
+            </div>
+
+            <div class="brand-row">
+                <div class="brand">
+                    <img src="/assets/Icons/tech-connect-logo.svg" alt="Tech Connect logo" width="16" height="16">
+                </div>
+                <button class="menu-btn" type="button" aria-label="Menu">
+                    <img src="/assets/Icons/material-symbols--menu-rounded.svg" alt="">
+                </button>
+            </div>
+
+            <div class="service-header">
+                <h2 class="service-title">Repair Service #TC-4587</h2>
+                <span class="status-pill">In Progress</span>
+            </div>
+
+            <div class="meta">
+                <div>Technician: <strong>David Mensah</strong></div>
+                <div>Dec 10, 2024 • 10:24 AM</div>
+            </div>
+
+            <div class="timeline" aria-label="Repair progress timeline">
+                <div class="step done">
+                    <div class="dot"></div>
+                    <span>Request</span>
+                </div>
+                <div class="step done">
+                    <div class="dot"></div>
+                    <span>Accepted</span>
+                </div>
+                <div class="step done">
+                    <div class="dot"></div>
+                    <span>On Route</span>
+                </div>
+                <div class="step active">
+                    <div class="dot"></div>
+                    <span>In Progress</span>
+                </div>
+                <div class="step">
+                    <div class="dot"></div>
+                    <span>Completed</span>
+                </div>
+            </div>
+
+            <div class="tech-panel">
+                <div class="tech-row">
+                    <div class="tech-info">
+                        <div class="avatar" aria-label="Technician avatar">DM</div>
+                        <div>
+                            <p class="name">David Mensah</p>
+                            <div class="rating">
+                                <span class="star">
+                                    <img src="/assets/Icons/bi--star.svg" alt="Star rating">
+                                </span>
+                                <span>4.8 (1,234)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions" aria-label="Contact technician">
+                        <div class="icon-btn" title="Call">
+                            <img src="/assets/Icons/bxs--phone-call.svg" alt="Call technician">
+                        </div>
+                        <div class="icon-btn" title="Message">
+                            <img src="/assets/Icons/iconoven--chat.svg" alt="Message technician">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-box">
+                    <div class="location-head">
+                        <strong>Live Location</strong>
+                        <span>View details</span>
+                    </div>
+
+                    <div class="map" aria-label="Technician live location map">
+                        <div class="map-pin" aria-hidden="true"></div>
+                        <div class="location-label">Live</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

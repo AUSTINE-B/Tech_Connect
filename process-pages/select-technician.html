@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Technician Listing</title>
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --soft: #f7f9fc;
+            --primary: #2d5ef4;
+            --primary-dark: #234fe0;
+            --title: #1a1f2d;
+            --muted: #717d90;
+            --line: #e8edf4;
+            --shadow: 0 18px 40px rgba(17, 27, 49, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--title);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .listing-page {
+            width: min(100%, 420px);
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(132, 145, 172, 0.08);
+            padding: 14px 14px 18px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .step-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .step-tag .badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), #7aaaff);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+        }
+
+        .menu-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            color: var(--muted);
+            display: grid;
+            place-items: center;
+        }
+
+        .search-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            border-radius: 12px;
+            padding: 12px 14px 12px 36px;
+            font-size: 13px;
+            color: var(--title);
+            outline: none;
+        }
+
+        .search-wrap::before {
+            content: "⌕";
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .filter {
+            border: 1px solid var(--line);
+            background: white;
+            border-radius: 10px;
+            padding: 9px 10px;
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .filter.active {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-color: rgba(45, 94, 244, 0.18);
+        }
+
+        .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tech-card {
+            display: grid;
+            grid-template-columns: 52px 1fr auto;
+            gap: 12px;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: white;
+            padding: 10px 10px;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dfe9ff, #bdd1ff);
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: #234a7b;
+        }
+
+        .tech-name {
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        .star {
+            color: #f5b301;
+            font-size: 12px;
+        }
+
+        .meta {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .view-btn {
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 420px) {
+            .listing-page {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .tech-card {
+                grid-template-columns: 48px 1fr;
+            }
+
+            .view-btn {
+                grid-column: 2;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="listing-page">
+            <div class="topbar">
+                <div class="step-tag">
+                    <span class="badge">2</span>
+                    <span>Technician Listing Page</span>
+                </div>
+                <div class="menu-btn" aria-label="Menu">☰</div>
+            </div>
+
+            <div class="search-wrap">
+                <input type="text" placeholder="Search technicians..." aria-label="Search technicians" />
+            </div>
+
+            <div class="filter-row" aria-label="Filters">
+                <div class="filter active">All Categories</div>
+                <div class="filter">Location</div>
+                <div class="filter">Rating</div>
+            </div>
+
+            <div class="tech-list">
+                <div class="tech-card">
+                    <div class="avatar">DM</div>
+                    <div>
+                        <div class="tech-name">David Mensah</div>
+                        <div class="rating"><span class="star">★</span> <span>4.8</span> <span>(134 reviews)</span></div>
+                        <div class="meta">Electrical &amp; Disaster Special</div>
+                    </div>
+                    <button class="view-btn" type="button">View Profile</button>
+                </div>
+
+                <div class="tech-card">
+                    <div class="avatar">SL</div>
+                    <div>
+                        <div class="tech-name">Sarah Lopez</div>
+                        <div class="rating"><span class="star">★</span> <span>4.9</span> <span>(190 reviews)</span></div>
+                        <div class="meta">Plumbing Specialist</div>
+                    </div>
+                    <button class="view-btn" type="button">View Profile</button>
+                </div>
+
+                <div class="tech-card">
+                    <div class="avatar">JC</div>
+                    <div>
+                        <div class="tech-name">James Carter</div>
+                        <div class="rating"><span class="star">★</span> <span>4.6</span> <span>(118 reviews)</span></div>
+                        <div class="meta">AC &amp; Cooling</div>
+                    </div>
+                    <button class="view-btn" type="button">View Profile</button>
+                </div>
+
+                <div class="tech-card">
+                    <div class="avatar">AH</div>
+                    <div>
+                        <div class="tech-name">Ahmed Hassan</div>
+                        <div class="rating"><span class="star">★</span> <span>4.7</span> <span>(103 reviews)</span></div>
+                        <div class="meta">Appliance Repair</div>
+                    </div>
+                    <button class="view-btn" type="button">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

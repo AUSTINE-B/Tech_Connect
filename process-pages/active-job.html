@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Active Job</title>
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --soft: #f7f9fc;
+            --primary: #2d5ef4;
+            --primary-soft: #edf3ff;
+            --title: #181f2d;
+            --muted: #717d90;
+            --line: #e7edf4;
+            --green: #1bbd6f;
+            --green-soft: #ebfaf2;
+            --orange: #f4a423;
+            --shadow: 0 18px 42px rgba(17, 27, 49, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--title);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .job-card {
+            width: min(100%, 380px);
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(132, 146, 172, 0.1);
+            padding: 16px 16px 18px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .header-title::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+            box-shadow: 0 0 0 4px rgba(27, 189, 111, 0.12);
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .header-icons span {
+            width: 20px;
+            height: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            display: grid;
+            place-items: center;
+        }
+
+        .job-panel {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: white;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .job-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .job-meta {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #fff6df;
+            color: #ae7200;
+            border: 1px solid rgba(244, 164, 35, 0.2);
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .status-pill::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--orange);
+            display: inline-block;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            padding: 10px 0 12px;
+            color: var(--title);
+        }
+
+        .elapsed-label {
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .info-item {
+            display: grid;
+            grid-template-columns: 18px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            font-size: 12px;
+            color: var(--title);
+        }
+
+        .info-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 4px rgba(27, 189, 111, 0.08);
+        }
+
+        .info-item .value {
+            font-weight: 700;
+        }
+
+        .info-item .sub {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .details {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--line);
+        }
+
+        .details h3 {
+            margin: 0 0 12px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .field-row .label {
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .field-row .value {
+            font-weight: 700;
+        }
+
+        .progress-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 2px;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--title);
+        }
+
+        .progress-item .check {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--green-soft);
+            border: 1px solid rgba(27, 189, 111, 0.18);
+            position: relative;
+        }
+
+        .progress-item .check::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 2px;
+            width: 4px;
+            height: 7px;
+            border: solid var(--green);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .progress-item.inactive .check {
+            border-color: var(--line);
+            background: white;
+        }
+
+        .progress-item.inactive .check::after {
+            display: none;
+        }
+
+        .progress-item.inactive {
+            color: var(--muted);
+        }
+
+        .cta {
+            margin-top: 18px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+            color: white;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(45, 94, 244, 0.2);
+        }
+
+        @media (max-width: 380px) {
+            .job-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .timer {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="job-card">
+            <div class="header">
+                <div class="header-title">Active Job</div>
+                <div class="header-icons" aria-label="Actions">
+                    <span>◌</span>
+                    <span>⚙</span>
+                </div>
+            </div>
+
+            <div class="job-panel">
+                <div class="job-row">
+                    <div class="job-meta">ITC-4587 • Electrical Repair</div>
+                    <span class="status-pill">In Progress</span>
+                </div>
+
+                <div class="timer">01:24:36</div>
+                <div class="elapsed-label">Elapsed Time</div>
+
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-dot"></span>
+                        <span class="value">John Doe</span>
+                        <span class="sub">+233 024 123 4567</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-dot" style="background:#5a8dff; box-shadow:0 0 0 4px rgba(90,141,255,0.1);"></span>
+                        <span class="value">Location</span>
+                        <span class="sub">Accra, 123 Main St</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details">
+                <h3>Job Details</h3>
+                <div class="field-row">
+                    <div class="label">Category</div>
+                    <div class="value">Electrical Repair</div>
+                </div>
+                <div class="field-row">
+                    <div class="label">Notes</div>
+                    <div class="value">Replace faulty circuit breaker.</div>
+                </div>
+            </div>
+
+            <div class="details">
+                <h3>Progress</h3>
+                <div class="progress-list">
+                    <div class="progress-item"><span class="check"></span> Inspection Sent</div>
+                    <div class="progress-item"><span class="check"></span> Payment Received</div>
+                    <div class="progress-item"><span class="check"></span> Work In Progress</div>
+                    <div class="progress-item inactive"><span class="check"></span> Testing</div>
+                    <div class="progress-item inactive"><span class="check"></span> Completion</div>
+                </div>
+            </div>
+
+            <button class="cta" type="button">Complete Job</button>
+        </div>
+    </div>
+</body>
+</html>
