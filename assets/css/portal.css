@@ -1,0 +1,5 @@
+    body { font-family: Arial, sans-serif; background: #f5f7fb; color: #17212f; }
+    .portal-shell { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+    .portal-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; }
+    .sidebar, .panel { background: #fff; border: 1px solid #e3eaf4; border-radius: 18px; }
+    @media (max-width: 900px) { .portal-layout { grid-template-columns: 1fr; } }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-labelledby="title desc">
+  <title id="title">Tech Connect</title>
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(22 20)">
+    <path d="M44 38 80 58v42l-36 21-36-21V58z" fill="#101b32" stroke="url(#accent)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M44 38v43m0 0 36-23M44 81 8 60m36 21v40" fill="none" stroke="#e6f7ff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="44" cy="38" r="8" fill="#22d3ee"/>
+    <circle cx="80" cy="58" r="8" fill="#818cf8"/>
+    <circle cx="80" cy="100" r="8" fill="#22d3ee"/>
+    <circle cx="44" cy="121" r="8" fill="#818cf8"/>
+    <circle cx="8" cy="100" r="8" fill="#22d3ee"/>
+    <circle cx="8" cy="58" r="8" fill="#818cf8"/>
+    <circle cx="44" cy="81" r="10" fill="#f8fafc" stroke="#6366f1" stroke-width="4"/>
+  </g>
+  <text x="142" y="91" fill="#101b32" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="48" font-weight="750" letter-spacing="-1.8">Tech</text>
+  <text x="142" y="139" fill="#4f46e5" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="48" font-weight="750" letter-spacing="-1.8">Connect</text>
+</svg>

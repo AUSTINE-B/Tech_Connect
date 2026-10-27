@@ -1,0 +1,6 @@
+    body { font-family: Arial, sans-serif; background: #f5f7fb; color: #1b2430; }
+    .auth-shell { max-width: 980px; margin: 80px auto; background: #fff; border: 1px solid #e3eaf4; border-radius: 22px; overflow: hidden; }
+    .auth-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .auth-side { background: linear-gradient(135deg, #4d5df5, #2f3fcf); color: #fff; padding: 38px 30px; }
+    .auth-form { padding: 30px; }
+    @media (max-width: 760px) { .auth-grid { grid-template-columns: 1fr; } }
