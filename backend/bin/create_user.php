@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);
+if(PHP_SAPI!=='cli'){http_response_code(404);exit;}
+$root=dirname(__DIR__,2);$configFile=dirname(__DIR__).'/config.local.php';$config=is_file($configFile)?require $configFile:[];
+$host=$config['host']??(getenv('TECHCONNECT_DB_HOST')?:'127.0.0.1');$port=$config['port']??(getenv('TECHCONNECT_DB_PORT')?:'3306');$name=$config['database']??(getenv('TECHCONNECT_DB_NAME')?:'techconnect');$user=$config['user']??(getenv('TECHCONNECT_DB_USER')?:'root');$password=$config['password']??(getenv('TECHCONNECT_DB_PASSWORD')?:'');
+$options=getopt('', ['email:','name:','role:','phone::','trades::','zones::']);$roles=['technician','dispatcher','supervisor','price_manager','price_approver','payroll','admin'];
+foreach(['email','name','role'] as $required)if(empty($options[$required])){fwrite(STDERR,"Usage: php backend/bin/create_user.php --email=... --name=... --role=admin|technician|dispatcher [--phone=...] [--trades=plumbing,electrical] [--zones=DOUALA_AKWA]\n");exit(2);}
+if(!in_array($options['role'],$roles,true)){fwrite(STDERR,'Unsupported staff role.'.PHP_EOL);exit(2);}
+$pass=readline('Password (minimum 12 characters): ');if(strlen($pass)<12){fwrite(STDERR,'Password must contain at least 12 characters.'.PHP_EOL);exit(2);}
+try{$pdo=new PDO("mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4",$user,$password,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);$id=sprintf('%s-%s-4%s-%s%s-%s',bin2hex(random_bytes(4)),bin2hex(random_bytes(2)),bin2hex(random_bytes(2)),dechex(random_int(8,11)),bin2hex(random_bytes(1)),bin2hex(random_bytes(6)));$s=$pdo->prepare('INSERT INTO app_user(id,email,display_name,phone,password_hash,password_salt,role,created_at) VALUES (?,?,?,?,?,?,?,UTC_TIMESTAMP(6))');$s->execute([$id,strtolower(trim($options['email'])),trim($options['name']),$options['phone']??'',password_hash($pass,PASSWORD_BCRYPT),str_repeat('0',32),$options['role']]);
+if($options['role']==='technician'){$insert=$pdo->prepare('INSERT INTO employee_trade_authorization(user_id,trade_code,zone_code) VALUES (?,?,?)');$trades=array_filter(array_map('trim',explode(',',$options['trades']??'')));$zones=array_filter(array_map('trim',explode(',',$options['zones']??'DOUALA_BONAMOUSSADI,DOUALA_AKWA')));foreach($trades as $trade)foreach($zones as $zone)$insert->execute([$id,strtolower($trade),$zone]);}echo "Created {$options['role']} account {$options['email']} ({$id})".PHP_EOL;
+}catch(Throwable $e){fwrite(STDERR,'Could not create account: '.$e->getMessage().PHP_EOL);exit(1);}

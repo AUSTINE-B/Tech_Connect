@@ -1,0 +1,367 @@
+openapi: 3.1.0
+info:
+  title: TechConnect API
+  version: 1.0.0
+  description: Local MVP contract. Development payment confirmation is not a live payment API.
+servers:
+  - url: http://localhost/astra/api/v1
+security: []
+tags:
+  - name: Authentication
+  - name: Catalog
+  - name: Requests
+  - name: Dispatch
+  - name: Estimates
+  - name: Payments
+  - name: Work
+  - name: Administration
+paths:
+  /health:
+    get:
+      tags: [Catalog]
+      responses:
+        '200': {description: API is available}
+  /catalog:
+    get:
+      tags: [Catalog]
+      responses:
+        '200':
+          description: Published example items and development-only price notice
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Envelope'}
+  /zones:
+    get:
+      tags: [Catalog]
+      responses:
+        '200': {description: Active service zones}
+  /auth/register:
+    post:
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, phone, password, consent, termsVersion]
+              properties:
+                name: {type: string, minLength: 1}
+                email: {type: string, format: email}
+                phone: {type: string, minLength: 8}
+                password: {type: string, minLength: 12}
+                consent: {type: boolean, const: true}
+                termsVersion: {type: string}
+                language: {type: string, enum: [en, fr]}
+      responses:
+        '201': {description: Customer account and bearer session created}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /auth/login:
+    post:
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: {type: string, format: email}
+                password: {type: string}
+      responses:
+        '200': {description: Bearer session created}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /auth/logout:
+    post:
+      tags: [Authentication]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Current session revoked}
+  /me:
+    get:
+      tags: [Authentication]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Current account profile}
+  /requests:
+    get:
+      tags: [Requests]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Requests visible to current role}
+    post:
+      tags: [Requests]
+      security: [{bearerAuth: []}]
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category, tradeCode, zoneCode, issue, address, preferredSlot, consent, consentVersion]
+              properties:
+                category: {type: string}
+                tradeCode: {type: string}
+                zoneCode: {type: string}
+                issue: {type: string, maxLength: 2000}
+                address: {type: string}
+                preferredSlot: {type: string}
+                consent: {type: boolean, const: true}
+                consentVersion: {type: string}
+      responses:
+        '201': {description: Request created}
+        '422': {$ref: '#/components/responses/Validation'}
+  /requests/{requestId}:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    get:
+      tags: [Requests]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Authorized request details}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /dispatch/queue:
+    get:
+      tags: [Dispatch]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Requests awaiting assignment; does not expose full address}
+  /admin/progress:
+    get:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: All service requests grouped by current workflow status; admin only}
+  /admin/categories:
+    get:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Active service categories; admin only}
+  /admin/categories/save:
+    post:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {type: object, required: [categoryName, tradeCode], properties: {originalName: {type: string}, categoryName: {type: string, maxLength: 80}, tradeCode: {type: string}, imagePath: {type: string}, iconPath: {type: string}}}
+      responses:
+        '200': {description: Category updated}
+        '201': {description: Category created}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /admin/technicians:
+    get:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Technician roster with assigned trades and service areas; admin only}
+    post:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {type: object, required: [name, email, password, tradeCode, zones], properties: {name: {type: string}, email: {type: string, format: email}, phone: {type: string}, password: {type: string, minLength: 12}, tradeCode: {type: string}, zones: {type: array, items: {type: string}}}}
+      responses:
+        '201': {description: Technician account created}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /admin/catalog/save:
+    post:
+      tags: [Administration]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {type: object, required: [name, category, priceMin, priceMax], properties: {code: {type: string}, name: {type: string}, nameFr: {type: string}, category: {type: string}, description: {type: string}, priceMin: {type: integer, minimum: 0}, priceMax: {type: integer, minimum: 0}, plannedMinutes: {type: integer, minimum: 0, maximum: 1440}}}
+      responses:
+        '200': {description: Service and planning estimate range updated}
+        '201': {description: Service created}
+        '401': {$ref: '#/components/responses/Unauthorized'}  /staff:
+    get:
+      tags: [Dispatch]
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Active technician trade and zone authorizations}
+  /requests/{requestId}/assignments:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [Dispatch]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [technicianId, reason]
+              properties:
+                technicianId: {type: string, format: uuid}
+                reason: {type: string}
+                eta: {type: string, nullable: true}
+      responses:
+        '201': {description: Eligible employee assignment offered}
+        '422': {$ref: '#/components/responses/Validation'}
+  /requests/{requestId}/response:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [Dispatch]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: {type: string, enum: [accept, decline]}
+                reason: {type: string}
+      responses:
+        '200': {description: Assignment response recorded}
+  /requests/{requestId}/diagnosis:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [Requests]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required: [code, quantity]
+                    properties:
+                      code: {type: string}
+                      quantity: {type: integer, minimum: 1, maximum: 20}
+      responses:
+        '201': {description: Immutable itemized estimate submitted to customer}
+  /estimates/{estimateId}/decision:
+    parameters:
+      - name: estimateId
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+    post:
+      tags: [Estimates]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: {type: string, enum: [accept, decline]}
+      responses:
+        '200': {description: Customer estimate decision recorded}
+  /estimates/{estimateId}/payments:
+    parameters:
+      - name: estimateId
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+    post:
+      tags: [Payments]
+      security: [{bearerAuth: []}]
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '201': {description: Local development payment attempt created as pending; no money moves}
+  /payments/{paymentId}/dev-confirm:
+    parameters:
+      - name: paymentId
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+    post:
+      tags: [Payments]
+      description: Local customer-owned or admin-operated simulation. The XAMPP configuration flag dev_payments must be true (or TECHCONNECT_DEV_PAYMENTS=1). Never a production payment operation and never transfers money.
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Development payment simulation marked confirmed}
+  /requests/{requestId}/work-events:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [Work]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action: {type: string, enum: [START, PAUSE, RESUME, COMPLETE]}
+                reason: {type: string}
+      responses:
+        '200': {description: Work timer and request transition recorded}
+  /requests/{requestId}/completion:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [Work]
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: {type: string, enum: [complete, rework, dispute]}
+                detail: {type: string}
+      responses:
+        '200': {description: Customer confirmed completion or opened a case}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque session token
+  parameters:
+    RequestId:
+      name: requestId
+      in: path
+      required: true
+      schema: {type: string}
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema: {type: string, minLength: 8, maxLength: 128}
+  responses:
+    Unauthorized:
+      description: Missing or invalid session
+    Conflict:
+      description: Duplicate or conflicting record
+    Validation:
+      description: Invalid input or state transition
+    NotFound:
+      description: Record not found or not visible to caller
+  schemas:
+    Envelope:
+      type: object
+      properties:
+        data: {type: object}
+        requestId: {type: string}
