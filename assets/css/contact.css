@@ -1,0 +1,5 @@
+    body { font-family: Arial, sans-serif; }
+    .contact-section { max-width: 1100px; margin: 48px auto; padding: 0 20px; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 22px; }
+    .contact-information, .contact-form { background:#fff; border:1px solid #e3eaf4; border-radius:20px; padding:24px; }
+    @media (max-width: 760px) { .contact-layout { grid-template-columns: 1fr; } }

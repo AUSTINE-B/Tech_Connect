@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Inspection Details</title>
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --soft: #f7f9fc;
+            --primary: #2d5ef4;
+            --primary-soft: #eef4ff;
+            --title: #1a1f2d;
+            --muted: #737d90;
+            --line: #e7edf4;
+            --green: #1bbb6f;
+            --green-soft: #ebfaf3;
+            --orange: #ffb524;
+            --shadow: 0 18px 42px rgba(18, 30, 72, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--title);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .inspection-card {
+            width: min(100%, 420px);
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(133, 146, 172, 0.08);
+            padding: 14px 16px 18px;
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .job-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--title);
+        }
+
+        .job-badge .circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #86adff);
+            position: relative;
+        }
+
+        .job-badge .circle::before {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .mini-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .mini-icons span {
+            width: 22px;
+            height: 22px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            display: grid;
+            place-items: center;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 800;
+            margin: 0 0 12px;
+            letter-spacing: -0.03em;
+        }
+
+        .form-block {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 14px;
+        }
+
+        .form-block label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--title);
+        }
+
+        .text-field,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--soft);
+            padding: 11px 12px;
+            font-size: 13px;
+            color: var(--title);
+            outline: none;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+            background-position: calc(100% - 16px) calc(50% - 2px), calc(100% - 11px) calc(50% - 2px);
+            background-size: 5px 5px, 5px 5px;
+            background-repeat: no-repeat;
+            padding-right: 30px;
+        }
+
+        textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        .quote-box {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 10px;
+            background: var(--soft);
+        }
+
+        .quote-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--line);
+            font-size: 12px;
+            color: var(--title);
+        }
+
+        .quote-row:last-child {
+            border-bottom: none;
+        }
+
+        .quote-row .label {
+            color: var(--muted);
+        }
+
+        .quote-row .qty {
+            min-width: 32px;
+            text-align: center;
+            color: var(--title);
+            font-weight: 700;
+        }
+
+        .quote-row .price {
+            font-weight: 700;
+            min-width: 54px;
+            text-align: right;
+        }
+
+        .quote-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 800;
+            padding: 12px 12px 10px;
+            background: white;
+            border-top: 1px solid var(--line);
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 12px 14px;
+            margin-top: 16px;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(45, 94, 244, 0.2);
+        }
+
+        @media (max-width: 420px) {
+            .inspection-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .quote-row {
+                grid-template-columns: 1fr auto auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="inspection-card">
+            <div class="top-row">
+                <div class="job-badge">
+                    <span class="circle" aria-hidden="true"></span>
+                    <span>ITC-4587 • Electrical Repair</span>
+                </div>
+                <div class="mini-icons" aria-label="Actions">
+                    <span>◌</span>
+                    <span>⚙</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">Inspection Details</h2>
+
+            <div class="form-block">
+                <label for="problem">Problem</label>
+                <input id="problem" class="text-field" type="text" value="Power outage in kitchen" aria-label="Problem" />
+            </div>
+
+            <div class="form-block">
+                <label for="category">Category</label>
+                <select id="category" aria-label="Category">
+                    <option selected>Electrical Repair</option>
+                    <option>Plumbing</option>
+                    <option>Air Conditioning</option>
+                    <option>Painting</option>
+                </select>
+            </div>
+
+            <div class="form-block">
+                <label for="notes">Notes</label>
+                <textarea id="notes" aria-label="Notes">Faulty circuit breaker. Needs replacement.</textarea>
+            </div>
+
+            <div class="form-block">
+                <label>Recommended Parts/Services</label>
+                <div class="quote-box">
+                    <div class="quote-row">
+                        <span class="label">Circuit Breaker</span>
+                        <span class="qty">1</span>
+                        <span class="price">$40.00</span>
+                    </div>
+                    <div class="quote-row">
+                        <span class="label">Labour (1.5 hrs)</span>
+                        <span class="qty">1</span>
+                        <span class="price">$45.00</span>
+                    </div>
+                    <div class="quote-total">
+                        <span>Total Quotation</span>
+                        <span>$85.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="submit-btn" type="button">Send Quotation</button>
+        </div>
+    </div>
+</body>
+</html>

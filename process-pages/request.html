@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechConnect | Requests</title>
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --panel: #ffffff;
+            --soft: #f7f9fc;
+            --primary: #2d5ef4;
+            --primary-soft: #edf3ff;
+            --primary-strong: #224fe0;
+            --title: #191f2d;
+            --muted: #7a8395;
+            --line: #e9edf3;
+            --green: #1cbd6e;
+            --green-soft: #ebfaf3;
+            --red: #e84d5d;
+            --red-soft: #ffecef;
+            --orange: #f6a63a;
+            --shadow: 0 18px 40px rgba(17, 27, 51, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--title);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .page-shell {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .requests-card {
+            width: min(100%, 420px);
+            background: var(--panel);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(131, 144, 170, 0.1);
+            padding: 16px 14px 18px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            padding: 2px 2px 0;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .title-mark {
+            width: 16px;
+            height: 16px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, var(--primary), #7aa7ff);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title-mark::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+        }
+
+        .alert {
+            width: 20px;
+            height: 20px;
+            border-radius: 8px;
+            background: var(--soft);
+            border: 1px solid var(--line);
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-color: rgba(45, 94, 244, 0.2);
+        }
+
+        .tab small {
+            font-size: 10px;
+            opacity: 0.9;
+            display: inline-block;
+            margin-left: 4px;
+            background: rgba(45, 94, 244, 0.08);
+            color: var(--primary);
+            border-radius: 999px;
+            padding: 2px 5px;
+            font-weight: 800;
+        }
+
+        .request-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .request-item {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            padding: 10px 12px;
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .job-id {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--title);
+        }
+
+        .job-id .marker {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+        }
+
+        .job-id .marker.pending {
+            background: #ffb523;
+        }
+
+        .chevron {
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .request-body {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .service-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--title);
+            margin-bottom: 3px;
+        }
+
+        .client-text {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .distance {
+            font-size: 11px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: white;
+            color: var(--title);
+            padding: 8px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--green), #30c67b);
+            color: white;
+            border-color: rgba(28, 189, 110, 0.15);
+            box-shadow: 0 8px 18px rgba(28, 189, 110, 0.2);
+        }
+
+        .btn.danger {
+            background: var(--red-soft);
+            color: var(--red);
+            border-color: rgba(232, 77, 93, 0.12);
+        }
+
+        @media (max-width: 420px) {
+            .requests-card {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .request-body {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .action-row {
+                width: 100%;
+                justify-content: stretch;
+            }
+
+            .btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="requests-card">
+            <div class="topbar">
+                <div class="title">
+                    <span class="title-mark" aria-hidden="true"></span>
+                    <span>Requests</span>
+                </div>
+                <div class="alert" aria-label="Notifications">
+                    <img src="/assets/Icons/andrsrxn--bell-on.svg" alt="">
+                </div>
+            </div>
+
+            <div class="tabs" aria-label="Request tabs">
+                <div class="tab">New Requests <small>3</small></div>
+                <div class="tab active">Accepted <small>2</small></div>
+                <div class="tab">All</div>
+            </div>
+
+            <div class="request-list">
+                <div class="request-item">
+                    <div class="request-header">
+                        <div class="job-id"><span class="marker"></span>ITC-4587</div>
+                        <span class="chevron">›</span>
+                    </div>
+
+                    <div class="request-body">
+                        <div>
+                            <div class="service-name">Electrical Repair</div>
+                            <div class="client-text">Client: John Doe</div>
+                        </div>
+                        <div class="distance">3.2 km</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn" type="button">View Details</button>
+                        <button class="btn primary" type="button">Accept</button>
+                        <button class="btn danger" type="button">Decline</button>
+                    </div>
+                </div>
+
+                <div class="request-item">
+                    <div class="request-header">
+                        <div class="job-id"><span class="marker pending"></span>ITC-4609</div>
+                        <span class="chevron">›</span>
+                    </div>
+
+                    <div class="request-body">
+                        <div>
+                            <div class="service-name">AC Maintenance</div>
+                            <div class="client-text">Client: Mary Brown</div>
+                        </div>
+                        <div class="distance">6.1 km</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn" type="button">View Details</button>
+                        <button class="btn primary" type="button">Accept</button>
+                        <button class="btn danger" type="button">Decline</button>
+                    </div>
+                </div>
+
+                <div class="request-item">
+                    <div class="request-header">
+                        <div class="job-id"><span class="marker"></span>ITC-4610</div>
+                        <span class="chevron">›</span>
+                    </div>
+
+                    <div class="request-body">
+                        <div>
+                            <div class="service-name">Plumbing Repair</div>
+                            <div class="client-text">Client: Samuel Ab</div>
+                        </div>
+                        <div class="distance">7.1 km</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn" type="button">View Details</button>
+                        <button class="btn primary" type="button">Accept</button>
+                        <button class="btn danger" type="button">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
